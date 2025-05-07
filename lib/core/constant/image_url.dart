@@ -3,7 +3,11 @@ class ImageUrl {
   static const String home = "assets/images/home.png";
   static const String quran = "assets/images/icon_quran.png";
   static const String beads = "assets/images/beads.png";
+  static const String audio = "assets/images/audio.png";
+  static const String rosary = "assets/images/rosary.png";
   static const String athkar = "assets/images/icon_doaa.png";
+  static const String athkarNight = "assets/images/icon_night.png";
+  static const String athkarMorning = "assets/images/icon_morning.png";
   static const String hadeas = "assets/images/icon_tahseen.png";
   static const String qibla = "assets/images/icon_qibla.png";
   static const String pray_time = "assets/images/icon_adzan.png";
@@ -24,5 +28,5 @@ class ImageUrl {
   static const String notification2 = "assets/images/daytime.png";
   static const String notification3 = "assets/images/nighttime.png";
   static const String notification4 = "assets/images/muslim.png";
-  static const String notification5 ="assets/images/dua_hands.png";
+  static const String notification5 = "assets/images/dua_hands.png";
 }

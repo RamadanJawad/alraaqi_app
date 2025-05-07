@@ -21,7 +21,16 @@ class CustomCounter extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 6.w),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16.r)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 5),
+            ),
+          ],
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(16.r)),
       child: Column(
         children: [
           Row(
@@ -35,7 +44,7 @@ class CustomCounter extends StatelessWidget {
               Text("عداد الصلاة على النبي",
                   style: TextStyle(
                       fontFamily: "Noor",
-                      fontSize: 18.sp,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold)),
               Spacer(),
               IconButton(
@@ -59,9 +68,7 @@ class CustomCounter extends StatelessWidget {
                   textAlign: TextAlign.center,
                   "اللهم صل وسلم وبارك على نبينا محمد ﷺ",
                   style: TextStyle(
-                      fontFamily: "Noor",
-                      fontSize: 18.sp,
-                      color: Colors.white),
+                      fontFamily: "Noor", fontSize: 20.sp, color: Colors.white),
                 ),
                 SizedBox(
                   width: 70.w,
@@ -78,7 +85,7 @@ class CustomCounter extends StatelessWidget {
                       counter,
                       style: TextStyle(
                           fontFamily: "Cairo",
-                          fontSize: 16.sp,
+                          fontSize: 18.sp,
                           color: Colors.white),
                     ),
                   ),

@@ -19,7 +19,16 @@ class HadeesWidget extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 6.w),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(16.r)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                spreadRadius: 1,
+                blurRadius: 8,
+                offset: const Offset(0, 5),
+              ),
+            ],
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(16.r)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -33,7 +42,7 @@ class HadeesWidget extends StatelessWidget {
                 Text(
                   "دعاء اليوم",
                   style: TextStyle(
-                      fontSize: 18.sp,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Noor",
                       color: ColorCode.secondaryColor),
@@ -87,9 +96,7 @@ class HadeesWidget extends StatelessWidget {
                 "${controller.dua}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontFamily: "Noor",
-                    fontSize: 17.sp,
-                    color: Colors.white),
+                    fontFamily: "Noor", fontSize: 19.sp, color: Colors.white),
               ),
             )
           ],

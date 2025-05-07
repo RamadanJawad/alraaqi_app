@@ -1,6 +1,10 @@
 import 'dart:async';
+import 'package:alraaqi_app/core/constant/image_url.dart';
 import 'package:alraaqi_app/core/data/data.dart';
+import 'package:alraaqi_app/core/functions/check_internet.dart';
+import 'package:alraaqi_app/core/functions/save_prayTimer.dart';
 import 'package:alraaqi_app/features/pray_time/controller/prayTime_controller.dart';
+import 'package:alraaqi_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +16,33 @@ class HomeController extends GetxController {
   var counter = 0.obs;
   int currentPage = 0;
   final controller = Get.put(PrayTimeController());
+
+  List itemData = [
+    {"name": "صوتيات", "imageUrl": ImageUrl.audio, "onPressed": Routes.audio},
+    {"name": "القرآن", "imageUrl": ImageUrl.quran, "onPressed": Routes.quran},
+    {
+      "name": "أذكار الصباح",
+      "imageUrl": ImageUrl.athkarMorning,
+      "onPressed": Routes.athkarMornign
+    },
+    {
+      "name": "أذكار المساء",
+      "imageUrl": ImageUrl.athkarNight,
+      "onPressed": Routes.athkarEvning
+    },
+    {"name": "الرقية", "imageUrl": ImageUrl.athkar, "onPressed": Routes.roqia},
+    {"name": "القبلة", "imageUrl": ImageUrl.qibla, "onPressed": Routes.qibla},
+    {
+      "name": "التحصينات",
+      "imageUrl": ImageUrl.hadeas,
+      "onPressed": Routes.tahseen
+    },
+    {
+      "name": "المؤذن",
+      "imageUrl": ImageUrl.pray_time,
+      "onPressed": Routes.pray_time
+    },
+  ];
 
   String ayha(index) {
     return Data.ayah[index]['text1'];
@@ -60,5 +91,6 @@ class HomeController extends GetxController {
         );
       },
     );
+    saveData(controller);
   }
 }

@@ -28,7 +28,7 @@ class LocationErrorWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: ColorCode.secondaryColor,
-                fontSize: 19.sp,
+                fontSize: 20.sp,
                 fontFamily: "Noor"),
           ),
           SizedBox(

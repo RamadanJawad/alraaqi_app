@@ -20,6 +20,9 @@ class BodyPrayTime extends StatelessWidget {
               height: 10.h,
             ),
             const PrayTimeWidget(),
+            SizedBox(
+              height: 10.h,
+            ),
             CustomPrayTime(
               isTapped: controller.isTapped,
               onTap: () {

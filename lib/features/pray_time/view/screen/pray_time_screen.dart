@@ -32,11 +32,21 @@ class PrayTimeScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.my_location_sharp),
             ),
-            IconButton(
-              onPressed: () {
-                controller.prayTimeNotification();
-              },
-              icon: const Icon(Icons.notifications,),
+            GetBuilder<PrayTimeController>(
+              builder: (controller) {
+                return IconButton(
+                  onPressed: () {
+                    controller.prayTimeNotification();
+                  },
+                  icon: Icon(
+                    SharedPrefController().status1
+                        ? Icons.notifications_active
+                        : Icons.notifications_off,
+                    color:
+                        SharedPrefController().status1 ? Colors.green : Colors.grey,
+                  ),
+                );
+              }
             )
           ],
           backgroundColor: ColorCode.mainColor,
@@ -45,7 +55,7 @@ class PrayTimeScreen extends StatelessWidget {
             "أوقات الصلاة",
             style: TextStyle(
                 fontFamily: "Noor",
-                fontSize: 18.sp,
+                fontSize: 20.sp,
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),

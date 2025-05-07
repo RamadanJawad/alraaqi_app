@@ -18,7 +18,7 @@ class HeaderNameWidget extends StatelessWidget {
       TextSpan(
         text: "الاختصارات",
         style: TextStyle(
-          fontSize: 18.sp,
+          fontSize: 20.sp,
           color: ColorCode.secondaryColor,
           fontFamily: "Noor",
         ),

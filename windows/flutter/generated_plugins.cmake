@@ -3,8 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  audioplayers_windows
   awesome_notifications
+  flutter_inappwebview_windows
   geolocator_windows
   permission_handler_windows
   rive_common

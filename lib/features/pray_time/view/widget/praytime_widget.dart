@@ -23,7 +23,16 @@ class PrayTimeWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 6.w),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(16.r)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    spreadRadius: 1,
+                    blurRadius: 8,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(16.r)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,7 +44,7 @@ class PrayTimeWidget extends StatelessWidget {
                         Text(
                           "صلاة ${controller.currentPray}",
                           style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 20.sp,
                               fontFamily: "Noor",
                               color: Colors.black),
                         ),
@@ -45,7 +54,7 @@ class PrayTimeWidget extends StatelessWidget {
                         Text(
                           controller.prayTime,
                           style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 20.sp,
                               fontFamily: "Noor",
                               color: Colors.black),
                         ),
@@ -62,7 +71,7 @@ class PrayTimeWidget extends StatelessWidget {
                                   .toString()
                                   .split('.')[0],
                               style: TextStyle(
-                                  fontSize: 25.sp,
+                                  fontSize: 26.sp,
                                   fontFamily: "Noor",
                                   color: ColorCode.mainColor),
                             );
@@ -74,7 +83,7 @@ class PrayTimeWidget extends StatelessWidget {
                         Text(
                           "باقي",
                           style: TextStyle(
-                              fontSize: 18.sp,
+                              fontSize: 20.sp,
                               fontFamily: "Noor",
                               color: ColorCode.secondaryColor),
                         ),
@@ -84,7 +93,7 @@ class PrayTimeWidget extends StatelessWidget {
                       controller.hijri!,
                       style: TextStyle(
                         fontFamily: "Noor",
-                        fontSize: 13.sp,
+                        fontSize: 15.sp,
                       ),
                     ),
                   ],

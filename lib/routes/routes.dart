@@ -1,4 +1,6 @@
-import 'package:alraaqi_app/features/athkar/view/screen/athkar_screen.dart';
+import 'package:alraaqi_app/features/athkar/view/screen/azkar_evning.dart';
+import 'package:alraaqi_app/features/athkar/view/screen/azkar_morning.dart';
+import 'package:alraaqi_app/features/audio/view/screen/audio_screen.dart';
 import 'package:alraaqi_app/features/home/controller/home_controller.dart';
 import 'package:alraaqi_app/features/home/view/screen/home_screen.dart';
 import 'package:alraaqi_app/features/pray_time/controller/prayTime_controller.dart';
@@ -17,9 +19,11 @@ class Routes {
   static const String home = '/home_view';
   static const String quran = '/quran_view';
   static const String roqia = '/roqia_view';
-  // static const String setting = '/setting_view';
-  // static const String allah_names = '/allah_names_view';
+  static const String subha = '/subha_view';
+  static const String audio = '/audio_view';
   static const String athkar = '/athkar_view';
+  static const String athkarMornign = '/athkarMornign_view';
+  static const String athkarEvning = '/athkarEvning_view';
   static const String tahseen = '/tahseen_view';
   static const String qibla = '/qibla_view';
   static const String pray_time = '/pray_time_view';
@@ -39,14 +43,17 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => TahseenScreen());
       case Routes.qibla:
         return MaterialPageRoute(builder: (_) => const QiblaScreen());
+      case Routes.athkarMornign:
+        return MaterialPageRoute(builder: (_) => AzkarMorning());
+      case Routes.athkarEvning:
+        return MaterialPageRoute(builder: (_) => const AzkarEvning());
+      case Routes.audio:
+        return MaterialPageRoute(builder: (_) => AudioScreen());
       case Routes.roqia:
         return MaterialPageRoute(builder: (_) => RoqiaScreen());
-      case Routes.athkar:
-        return MaterialPageRoute(builder: (_) => AthkarScreen());
+
       case Routes.quran:
         return MaterialPageRoute(builder: (_) => QuranScreen());
-      // case Routes.qibla:
-      //   return MaterialPageRoute(builder: (_) => QiblaScreen());
       case Routes.pray_time:
         return MaterialPageRoute(builder: (_) => PrayTimeScreen());
       default:

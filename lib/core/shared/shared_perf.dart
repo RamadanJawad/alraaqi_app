@@ -60,8 +60,8 @@ class SharedPrefController {
     return _sharedPreferences.getDouble("lat");
   }
 
-  bool? get status1 {
-    return _sharedPreferences.getBool("status1");
+  bool get status1 {
+    return _sharedPreferences.getBool("status1") ?? false;
   }
 
   bool? get status2 {

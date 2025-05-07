@@ -56,12 +56,12 @@ class CustomPrayTime extends StatelessWidget {
                       ),
                       Text(
                         prayTimeName,
-                        style: TextStyle(fontFamily: "Noor", fontSize: 18.sp),
+                        style: TextStyle(fontFamily: "Noor", fontSize: 20.sp),
                       ),
                       const Spacer(),
                       Text(
                         prayTime,
-                        style: TextStyle(fontFamily: "Noor", fontSize: 18.sp),
+                        style: TextStyle(fontFamily: "Noor", fontSize: 20.sp),
                       ),
                     ],
                   ),

@@ -1,5 +1,6 @@
 import 'package:adhan/adhan.dart';
 import 'package:alraaqi_app/core/functions/notification.dart';
+import 'package:alraaqi_app/core/functions/snackbar.dart';
 import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class PrayTimeController extends GetxController {
   bool value = false;
   late String prayTime;
   late PrayerTimes prayerTimes;
+  BuildContext context = Get.context!;
   late Coordinates coordinates;
   late CalculationParameters parameter;
   late PageController pageController;
@@ -25,12 +27,6 @@ class PrayTimeController extends GetxController {
   bool isTapped4 = false;
   bool isTapped5 = false;
   String? hijri;
-
-  getData() {
-    if (SharedPrefController().status1 != null) {
-      value = SharedPrefController().status1!;
-    }
-  }
 
   showDate() {
     var today = HijriCalendar.now();
@@ -76,32 +72,33 @@ class PrayTimeController extends GetxController {
     update();
   }
 
-  prayTimeNotification() {
-    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-      if (!isAllowed) {
-        AwesomeNotifications().requestPermissionToSendNotifications();
-      } else {
-        Future.delayed(const Duration(seconds: 1), () {
-          if (SharedPrefController().status1 == true) {
-            CheckNotifications().prayTimeNotification();
-          } else {
-            AwesomeNotifications().cancelSchedule(1);
-            AwesomeNotifications().cancelSchedule(2);
-            AwesomeNotifications().cancelSchedule(3);
-            AwesomeNotifications().cancelSchedule(4);
-            AwesomeNotifications().cancelSchedule(5);
-          }
-          update();
-        });
+  prayTimeNotification() async {
+    bool? isAllowed = await AwesomeNotifications().isNotificationAllowed();
+    if (!isAllowed) {
+      await AwesomeNotifications().requestPermissionToSendNotifications();
+      return;
+    }
+    bool status = SharedPrefController().status1;
+    status = !status;
+    SharedPrefController().saveStatus1(
+        status1: status); // Make sure this saves to SharedPreferences
+    if (status) {
+      CheckNotifications().prayTimeNotification();
+      showSnackBar(context, "تم تفعيل اشعارات أوقات الصلاة بنجاح",
+          Colors.grey); // Enable notifications
+    } else {
+      for (int i = 1; i <= 5; i++) {
+        AwesomeNotifications().cancelSchedule(i);
       }
-    });
+      showSnackBar(context, "تم ايقاف اشعارات أوقات الصلاة ", Colors.grey);
+    }
+    update(); // If you're using GetX or similar for UI update
   }
 
   @override
   void onInit() {
     showDate();
     initPryTime();
-    getData();
     super.onInit();
   }
 }

@@ -37,40 +37,4 @@ class CheckNotifications {
         hour: SharedPrefController().ishaHour!,
         minute: SharedPrefController().ishaMinute!);
   }
-
-  morningNotification() async {
-    NotificationManager.displayDailyNotification(
-        id: 6,
-        hour: 06,
-        minute: 00,
-        title: "أذكار الصباح",
-        description: "لا تنسى قراءة أذكار الصباح فهي حصنك المنيع");
-  }
-
-  nightNotification() async {
-    NotificationManager.displayDailyNotification(
-        id: 7,
-        hour: 20,
-        minute: 00,
-        title: "أذكار المساء",
-        description: ".لا تنسى قراءة أذكار المساء فهي حصنك المنيع");
-  }
-
-  otherNotification() async {
-    NotificationManager.displayHourlyNotifications(
-        id: 8,
-        title: "الصلاة على النبي",
-        description:
-            "اللهم صلِ وسلم وزِد وبارك على سيدنا محمد صلاةً تشفي بها صدورنا وتزكي بها نفوسنا وتطيب بها أرواحنا وتعطر بها أفواهنا.");
-  }
-
-  fridayNotification() async {
-    NotificationManager.displayWeeklyNotification(
-        id: 9,
-        title: 'جمعة مباركة',
-        description:
-            'اكثروا من الصلاة على سيدنا محمد ولا تنسى قراءة سورة الكهف',
-        dayOfWeek: DateTime.friday,
-        hour: 08);
-  }
 }

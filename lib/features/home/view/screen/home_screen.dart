@@ -18,11 +18,17 @@ class HomeScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: ColorCode.backgroundColor,
-        body: SafeArea(
+        body: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/background_home.png"),fit: BoxFit.fill),
+          ),
           child: ListView(
             children: [
-              HeaderWidget(),
+              HeaderWidget(
+                itemData: controller.itemData,
+              ),
               SizedBox(
                 height: 5.h,
               ),

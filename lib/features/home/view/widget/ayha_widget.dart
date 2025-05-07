@@ -20,7 +20,16 @@ class AyhaWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 6.w),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(16.r)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    spreadRadius: 1,
+                    blurRadius: 8,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(16.r)),
             child: Column(
               children: [
                 Row(
@@ -33,7 +42,7 @@ class AyhaWidget extends StatelessWidget {
                     Text("أية وعبرة",
                         style: TextStyle(
                           fontFamily: "Noor",
-                          fontSize: 18.sp,
+                          fontSize: 20.sp,
                           color: ColorCode.secondaryColor,
                           fontWeight: FontWeight.bold,
                         )),
@@ -73,7 +82,7 @@ class AyhaWidget extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 125.h,
+                  height: 130.h,
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
@@ -89,7 +98,7 @@ class AyhaWidget extends StatelessWidget {
                       return Column(
                         children: [
                           SizedBox(
-                            height: 7.h,
+                            height: 5.h,
                           ),
                           Center(
                             child: Text(
@@ -97,7 +106,7 @@ class AyhaWidget extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: "Noor",
-                                  fontSize: 16.sp,
+                                  fontSize: 18.sp,
                                   color: Colors.white),
                             ),
                           ),

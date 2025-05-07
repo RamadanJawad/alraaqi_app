@@ -13,30 +13,13 @@ class BodySplash extends StatelessWidget {
     return GetBuilder<SplashController>(
       init: SplashController(),
       builder: (controller) {
-        return Column(
-          children: [
-            const Spacer(),
-            FadeTransition(
-              opacity: controller.curve,
-              child: Column(
-                children: [
-                  Text(
-                    "الراقــــي",
-                    style: TextStyle(
-                        fontFamily: "Noor",
-                        fontWeight: FontWeight.bold,
-                        color: ColorCode.mainColor,
-                        fontSize: 30.sp),
-                  )
-                ],
-              ),
-            ),
-            const Spacer(),
-            Image.asset(
-              ImageUrl.mosque,
-              color: ColorCode.mainColor,
-            ),
-          ],
+        return SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Image.asset(
+            "assets/images/background.jpg",
+            fit: BoxFit.cover,
+          ),
         );
       },
     );

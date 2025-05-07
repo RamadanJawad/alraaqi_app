@@ -1,3 +1,4 @@
+import 'package:alraaqi_app/core/functions/init_notification.dart';
 import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:alraaqi_app/routes/routes.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -8,20 +9,21 @@ import 'package:hijri/hijri_calendar.dart';
 
 void main() async {
   AwesomeNotifications().initialize(
-    'resource://drawable/logo',
-    [
-      NotificationChannel(
-        channelKey: 'prayTime_channel',
-        channelName: 'Pray Time Notification',
-        channelDescription: 'Notification channel for basic tests',
-        defaultColor: const Color(0xFF9D50DD),
-        ledColor: Colors.white,
-        importance: NotificationImportance.High,
-        channelShowBadge: true,
-      ),
-    ],
-  );
+      'resource://drawable/logo',
+      [
+        NotificationChannel(
+          channelKey: 'prayTime_channel',
+          channelName: 'Pray Time Notification',
+          channelDescription: 'Notification channel for basic tests',
+          defaultColor: const Color(0xFF9D50DD),
+          ledColor: Colors.white,
+          importance: NotificationImportance.High,
+          channelShowBadge: true,
+        ),
+      ],
+      debug: true);
   WidgetsFlutterBinding.ensureInitialized();
+  initAudioBackground();
   await SharedPrefController().initSharedPreferences();
   HijriCalendar.setLocal("ar");
   runApp(const MyApp());
