@@ -13,8 +13,11 @@ class AzkarEvning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AthkarController());
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: ColorCode.backgroundColor,
         appBar: AppBar(
@@ -39,7 +42,6 @@ class AzkarEvning extends StatelessWidget {
           ),
         ),
         body: GetBuilder<AthkarController>(
-            init: AthkarController(),
             builder: (controller) => controller.status
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),

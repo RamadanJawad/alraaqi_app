@@ -1,5 +1,7 @@
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/roqia/controller/roqia_controller.dart';
-import 'package:alraaqi_app/features/roqia/view/widget/details_screen.dart';
+import 'package:alraaqi_app/features/roqia/view/screen/details_screen.dart';
+import 'package:alraaqi_app/features/roqia/view/widget/play_tool.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:alraaqi_app/core/constant/color.dart';
@@ -11,8 +13,11 @@ class RoqiaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RoqiaController());
     return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+            ? TextDirection.rtl
+            : TextDirection.ltr,
         child: Scaffold(
           backgroundColor: ColorCode.backgroundColor,
           appBar: AppBar(
@@ -20,7 +25,7 @@ class RoqiaScreen extends StatelessWidget {
             actions: [IconButton(onPressed: () {}, icon: Icon(Icons.favorite))],
             iconTheme: IconThemeData(color: Colors.white),
             title: Text(
-              "الرقية الشرعية",
+              ManagerStrings.ruqyahShariah,
               style: TextStyle(
                   fontFamily: "Noor",
                   fontSize: 20.sp,
@@ -28,10 +33,12 @@ class RoqiaScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          body: GetBuilder<RoqiaController>(
-              init: RoqiaController(),
-              builder: (controller) {
-                return ListView.builder(
+          body: GetBuilder<RoqiaController>(builder: (controller) {
+            return Stack(
+              children: [
+                GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2),
                     itemCount: controller.mainItems.length,
                     itemBuilder: (context, index) {
                       final item = controller.mainItems[index];
@@ -65,32 +72,61 @@ class RoqiaScreen extends StatelessWidget {
                             ],
                             borderRadius: BorderRadius.circular(10.r),
                           ),
-                          child: ListTile(
-                            title: Text(
-                              item['title'],
-                              style: TextStyle(
-                                  fontFamily: "Noor",
-                                  fontSize: 18.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                            trailing: Container(
-                              width: 36.w,
-                              height: 36.h,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade100,
-                                  borderRadius: BorderRadius.circular(10.r)),
-                              child: Icon(
-                                CupertinoIcons.arrow_left_square,
-                                color: ColorCode.mainColor,
-                                size: 20,
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.r),
+                                child: Image.asset(
+                                  "assets/images/roqia.jpeg",
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  height: 100.h,
+                                ),
                               ),
-                            ),
+                              ListTile(
+                                contentPadding: EdgeInsets.all(0),
+                                title: Text(
+                                  item['title'],
+                                  style: TextStyle(
+                                      fontFamily: "Noor",
+                                      fontSize: 15.sp,
+                                      overflow: TextOverflow.clip,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                trailing: Container(
+                                  width: 35.w,
+                                  height: 35.h,
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius:
+                                          BorderRadius.circular(10.r)),
+                                  child: Icon(
+                                    CupertinoIcons.arrow_left_square,
+                                    color: ColorCode.mainColor,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );
-                    });
-              }),
+                    }),
+                Obx(() {
+                  if (controller.isShow.value) {
+                    return Align(
+                      alignment: Alignment.bottomCenter,
+                      child: PlayToolRoqia(),
+                    );
+                  } else {
+                    return SizedBox
+                        .shrink(); // لا شيء إذا لم يكن الشريط مفعّلًا
+                  }
+                }),
+              ],
+            );
+          }),
         ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:alraaqi_app/core/constant/color.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -45,7 +46,7 @@ class LocationErrorWidget extends StatelessWidget {
                 if (callback != null) callback!();
               },
               child: Text(
-                "حاول مجددا",
+                ManagerStrings.tryAgain,
                 style: TextStyle(fontFamily: "Noor", color: Colors.white),
               ),
             ),

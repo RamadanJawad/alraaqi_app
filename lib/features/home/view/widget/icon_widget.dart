@@ -17,8 +17,8 @@ class IconWidget extends StatelessWidget {
         InkWell(
           onTap: onPressed,
           child: Container(
-            width: 65.w,
-            height: 60.h,
+            width: 60.w,
+            height: 55.h,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300, width: 1.w),
@@ -33,7 +33,8 @@ class IconWidget extends StatelessWidget {
           name,
           style: TextStyle(
               fontFamily: "Noor",
-              fontSize: 14.sp,
+              fontSize: 13.sp,
+              overflow: TextOverflow.ellipsis,
               fontWeight: FontWeight.bold,
               color: ColorCode.secondaryColor),
         )

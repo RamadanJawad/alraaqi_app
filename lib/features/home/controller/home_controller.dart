@@ -1,48 +1,84 @@
 import 'dart:async';
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
 import 'package:alraaqi_app/core/constant/image_url.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/core/data/data.dart';
-import 'package:alraaqi_app/core/functions/check_internet.dart';
+import 'package:alraaqi_app/core/functions/awesome_dialog.dart';
 import 'package:alraaqi_app/core/functions/save_prayTimer.dart';
+import 'package:alraaqi_app/core/localization/locales.dart';
+import 'package:alraaqi_app/core/shared/shared_perf.dart';
+import 'package:alraaqi_app/features/audio/controller/audio_controller.dart';
 import 'package:alraaqi_app/features/pray_time/controller/prayTime_controller.dart';
 import 'package:alraaqi_app/routes/routes.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  late Timer _timer;
+  late Timer timer;
   late bool serviceEnable;
   late PageController pageController;
+  BuildContext context = Get.context!;
   late var dua;
   var counter = 0.obs;
   int currentPage = 0;
   final controller = Get.put(PrayTimeController());
+  final controllerAudio = Get.put(AudioController());
+  SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
+  final languagesList = LocaleSettings.languages;
+  String get currentLanguage => appSettingsPrefs.getLocale();
 
-  List itemData = [
-    {"name": "صوتيات", "imageUrl": ImageUrl.audio, "onPressed": Routes.audio},
-    {"name": "القرآن", "imageUrl": ImageUrl.quran, "onPressed": Routes.quran},
-    {
-      "name": "أذكار الصباح",
-      "imageUrl": ImageUrl.athkarMorning,
-      "onPressed": Routes.athkarMornign
-    },
-    {
-      "name": "أذكار المساء",
-      "imageUrl": ImageUrl.athkarNight,
-      "onPressed": Routes.athkarEvning
-    },
-    {"name": "الرقية", "imageUrl": ImageUrl.athkar, "onPressed": Routes.roqia},
-    {"name": "القبلة", "imageUrl": ImageUrl.qibla, "onPressed": Routes.qibla},
-    {
-      "name": "التحصينات",
-      "imageUrl": ImageUrl.hadeas,
-      "onPressed": Routes.tahseen
-    },
-    {
-      "name": "المؤذن",
-      "imageUrl": ImageUrl.pray_time,
-      "onPressed": Routes.pray_time
-    },
-  ];
+  Future<void> changeLanguage(
+      {required BuildContext context, required String languageCode}) async {
+    this.appSettingsPrefs.setLocale(languageCode);
+    EasyLocalization.of(context)!.setLocale(Locale(languageCode));
+    Get.updateLocale(Locale(languageCode));
+    update();
+  }
+
+  List get itemData => [
+        {
+          "name": ManagerStrings.audios,
+          "imageUrl": ImageUrl.audio,
+          "onPressed": Routes.audio
+        },
+        {
+          "name": ManagerStrings.quran,
+          "imageUrl": ImageUrl.quran,
+          "onPressed": Routes.quran
+        },
+        {
+          "name": ManagerStrings.morningAzkar,
+          "imageUrl": ImageUrl.athkarMorning,
+          "onPressed": Routes.athkarMornign
+        },
+        {
+          "name": ManagerStrings.eveningAzkar,
+          "imageUrl": ImageUrl.athkarNight,
+          "onPressed": Routes.athkarEvning
+        },
+        {
+          "name": ManagerStrings.ruqyah,
+          "imageUrl": ImageUrl.athkar,
+          "onPressed": Routes.roqia
+        },
+        {
+          "name": ManagerStrings.qibla,
+          "imageUrl": ImageUrl.qibla,
+          "onPressed": Routes.qibla
+        },
+        {
+          "name": ManagerStrings.protections,
+          "imageUrl": ImageUrl.hadeas,
+          "onPressed": Routes.tahseen
+        },
+        {
+          "name": ManagerStrings.muezzin,
+          "imageUrl": ImageUrl.pray_time,
+          "onPressed": Routes.pray_time
+        },
+      ];
 
   String ayha(index) {
     return Data.ayah[index]['text1'];
@@ -76,7 +112,7 @@ class HomeController extends GetxController {
     readData();
     super.onInit();
     pageController = PageController();
-    _timer = Timer.periodic(
+    timer = Timer.periodic(
       const Duration(seconds: 5),
       (Timer timer) {
         if (currentPage < 11) {
@@ -92,5 +128,20 @@ class HomeController extends GetxController {
       },
     );
     saveData(controller);
+    Future.delayed(Duration(seconds: 1), () {
+      showAwesomeDialog(
+          context: context,
+          description: ManagerStrings.titleDialog,
+          btnOkOnPress: () {
+            showAwesomeDialog(
+                context: context,
+                description: ManagerStrings.titleDialog2,
+                btnOkOnPress: () {
+                  Get.back();
+                },
+                dialogType: DialogType.info);
+          },
+          dialogType: DialogType.info);
+    });
   }
 }

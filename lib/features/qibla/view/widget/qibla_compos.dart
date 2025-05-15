@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:alraaqi_app/core/constant/color.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/qibla/controller/qibla_controller.dart';
 import 'package:alraaqi_app/features/qibla/view/widget/location_error_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,7 +46,7 @@ class QiblaCompass extends StatelessWidget {
               } else {
                 return LocationErrorWidget(
                   error:
-                      "لمعرفة اتجاه القبلة يرجى تفعيل خاصية الموقع من الهاتف",
+                      ManagerStrings.qiblaError,
                   callback: controller.checkLocationStatus,
                 );
               }

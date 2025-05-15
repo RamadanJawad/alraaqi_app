@@ -1,5 +1,6 @@
 import 'package:alraaqi_app/core/constant/color.dart';
 import 'package:alraaqi_app/core/constant/image_url.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -41,7 +42,7 @@ class CustomCounter extends StatelessWidget {
                 width: 23.w,
                 height: 23.w,
               ),
-              Text("عداد الصلاة على النبي",
+              Text(ManagerStrings.salawatCounter,
                   style: TextStyle(
                       fontFamily: "Noor",
                       fontSize: 20.sp,
@@ -66,7 +67,7 @@ class CustomCounter extends StatelessWidget {
               children: [
                 Text(
                   textAlign: TextAlign.center,
-                  "اللهم صل وسلم وبارك على نبينا محمد ﷺ",
+                  ManagerStrings.salawatPhrase,
                   style: TextStyle(
                       fontFamily: "Noor", fontSize: 20.sp, color: Colors.white),
                 ),

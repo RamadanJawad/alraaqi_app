@@ -1,4 +1,5 @@
 import 'package:alraaqi_app/core/constant/color.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/audio/controller/audio_controller.dart';
 import 'package:alraaqi_app/features/audio/view/screen/favorite_audio.dart';
 import 'package:alraaqi_app/features/audio/view/widget/reciters_widget.dart';
@@ -13,9 +14,11 @@ class AudioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AudioController());
+    final controller=Get.put(AudioController());
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -27,7 +30,7 @@ class AudioScreen extends StatelessWidget {
                 icon: Icon(Icons.favorite))
           ],
           iconTheme: IconThemeData(color: Colors.white),
-          title: Text("القرآن استماع",
+          title: Text(ManagerStrings.audios,
               style: TextStyle(
                   fontFamily: "Noor",
                   fontSize: 20.sp,

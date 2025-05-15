@@ -1,8 +1,11 @@
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
+import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TahseenController extends GetxController {
   Set<int> favoriteIndices = Set();
+  SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
   Future<void> loadFavorites() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? favs = prefs.getStringList('favorites_tahseen');

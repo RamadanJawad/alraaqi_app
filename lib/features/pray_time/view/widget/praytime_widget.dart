@@ -1,4 +1,5 @@
 import 'package:alraaqi_app/core/constant/color.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/core/functions/pray_time.dart';
 import 'package:alraaqi_app/features/pray_time/controller/prayTime_controller.dart';
 import 'package:alraaqi_app/routes/routes.dart';
@@ -42,7 +43,7 @@ class PrayTimeWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "صلاة ${controller.currentPray}",
+                          controller.currentPray,
                           style: TextStyle(
                               fontSize: 20.sp,
                               fontFamily: "Noor",
@@ -81,7 +82,7 @@ class PrayTimeWidget extends StatelessWidget {
                           width: 10.w,
                         ),
                         Text(
-                          "باقي",
+                          ManagerStrings.remaining,
                           style: TextStyle(
                               fontSize: 20.sp,
                               fontFamily: "Noor",

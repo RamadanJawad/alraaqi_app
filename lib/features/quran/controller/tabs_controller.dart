@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:alraaqi_app/core/data/data.dart';
 import 'package:alraaqi_app/features/quran/model/quran.dart';
 import 'package:alraaqi_app/features/quran/model/tafseer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_quran/flutter_quran.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-// import 'package:pdfx/pdfx.dart';
 
 class TabsController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -19,7 +15,6 @@ class TabsController extends GetxController
   List<Quran> quran = [];
   List<Tafseer> tafsir = [];
   List data = [];
-  final PdfViewerController pdfViewerController = PdfViewerController();
 
    void selectItem(int index) {
     selectedIndex = index;
@@ -67,7 +62,7 @@ class TabsController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(length: 2, vsync: this);
+    FlutterQuran().init();
   }
 
   @override

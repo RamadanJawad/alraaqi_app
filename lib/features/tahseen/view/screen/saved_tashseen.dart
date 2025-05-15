@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/core/data/data.dart';
 import 'package:alraaqi_app/features/tahseen/controller/tahseen_controller.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +21,18 @@ class SavedTahseenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favoriteAzkar = favoriteIndices.map((i) => azkarList[i]).toList();
+    final controller = Get.put(TahseenController());
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
           backgroundColor: ColorCode.backgroundColor,
           appBar: AppBar(
             backgroundColor: ColorCode.mainColor,
             iconTheme: IconThemeData(color: Colors.white),
             title: Text(
-              "التحصينات المحفوظة",
+              ManagerStrings.protectionsSaved,
               style: TextStyle(
                   fontFamily: "Noor",
                   fontSize: 20.sp,

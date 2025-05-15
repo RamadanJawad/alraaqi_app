@@ -1,5 +1,6 @@
 import 'package:alraaqi_app/core/constant/color.dart';
 import 'package:alraaqi_app/core/constant/image_url.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/core/data/data.dart';
 import 'package:alraaqi_app/features/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class AyhaWidget extends StatelessWidget {
                       width: 23.w,
                       height: 23.h,
                     ),
-                    Text("أية وعبرة",
+                    Text(ManagerStrings.verseAndLesson,
                         style: TextStyle(
                           fontFamily: "Noor",
                           fontSize: 20.sp,
@@ -52,15 +53,15 @@ class AyhaWidget extends StatelessWidget {
                           Clipboard.setData(ClipboardData(
                               text:
                                   "${controller.ayha(controller.currentPage)}\n ${controller.tafseer(controller.currentPage)}"));
-                          Get.showSnackbar(const GetSnackBar(
+                          Get.showSnackbar(GetSnackBar(
                             backgroundColor: ColorCode.mainColor,
                             messageText: Text(
-                              "تم نسخ النص بنجاح ",
+                              ManagerStrings.copyText,
                               textDirection: TextDirection.rtl,
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontFamily: "Cairo",
-                                  fontSize: 16),
+                                  fontFamily: "Noor",
+                                  fontSize: 16.sp),
                             ),
                             duration: Duration(seconds: 2),
                           ));

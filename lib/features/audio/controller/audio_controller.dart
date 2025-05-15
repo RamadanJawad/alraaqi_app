@@ -1,18 +1,18 @@
-import 'dart:io';
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
 import 'package:alraaqi_app/core/data/data.dart';
 import 'package:alraaqi_app/core/functions/convert_image.dart';
+import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:alraaqi_app/features/audio/view/screen/surah_screen.dart';
-import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AudioController extends GetxController {
   bool isPlaying = false;
   AudioPlayer player = AudioPlayer();
+  SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
   var duration = ''.obs;
   var position = ''.obs;
   var max = 0.0.obs;
@@ -38,6 +38,12 @@ class AudioController extends GetxController {
   bool isBannerAd = false;
   bool isInterstitialAd = false;
   List<Map<String, String>> favoriteAudio = [];
+
+  disposeAndClosePlayTool() {
+    player.stop();
+    isShow.value = false;
+    update();
+  }
 
   @override
   void onInit() {
@@ -91,9 +97,9 @@ class AudioController extends GetxController {
 
   changeIndex(int index) {
     selectItem = index;
-    name = Data.reciters[index]['name2'];
-    image = Data.reciters[index]['image'];
-    url = Data.reciters[index]['url'];
+    name = Data().reciters[index]['name2'];
+    image = Data().reciters[index]['image'];
+    url = Data().reciters[index]['url'];
     surah_url = "$url$id.mp3";
     Get.to(SurahScreen());
     update();
@@ -157,7 +163,6 @@ class AudioController extends GetxController {
         ),
       );
       player.play();
-      player.setVolume(1);
       updatePosition();
     } on Exception catch (e) {
       print(e.toString());

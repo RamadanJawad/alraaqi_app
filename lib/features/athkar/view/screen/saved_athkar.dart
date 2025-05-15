@@ -13,8 +13,11 @@ class SavedAzkarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AthkarController());
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: ColorCode.mainColor,

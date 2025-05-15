@@ -1,13 +1,16 @@
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/core/functions/init_notification.dart';
-import 'package:alraaqi_app/core/shared/shared_perf.dart';
+import 'package:alraaqi_app/core/localization/locales.dart';
 import 'package:alraaqi_app/routes/routes.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:hijri/hijri_calendar.dart';
 
 void main() async {
+  await initModule();
   AwesomeNotifications().initialize(
       'resource://drawable/logo',
       [
@@ -22,11 +25,16 @@ void main() async {
         ),
       ],
       debug: true);
-  WidgetsFlutterBinding.ensureInitialized();
   initAudioBackground();
-  await SharedPrefController().initSharedPreferences();
-  HijriCalendar.setLocal("ar");
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: localeSettings.locales,
+      path: ManagerTranslations.translationPath,
+      fallbackLocale: localeSettings.defaultLocale,
+      startLocale: localeSettings.defaultLocale,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,7 +46,10 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const GetMaterialApp(
+        return GetMaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: RouteGenerator.getRoute,
           initialRoute: Routes.splashView,

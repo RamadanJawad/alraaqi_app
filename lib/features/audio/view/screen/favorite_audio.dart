@@ -14,7 +14,9 @@ class FavoriteAudio extends StatelessWidget {
     return GetBuilder<AudioController>(
       builder: (controller) {
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+              ? TextDirection.rtl
+              : TextDirection.ltr,
           child: Scaffold(
             appBar: AppBar(
               iconTheme: IconThemeData(color: Colors.white),

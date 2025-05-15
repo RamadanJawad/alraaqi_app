@@ -1,17 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefController {
-  SharedPrefController._();
+  final SharedPreferences _sharedPreferences;
 
-  static SharedPrefController? _instance;
-  late SharedPreferences _sharedPreferences;
+  SharedPrefController(this._sharedPreferences);
 
-  factory SharedPrefController() {
-    return _instance ??= SharedPrefController._();
+  String getLocale() {
+    return _sharedPreferences.getString("locale_key").pareWithDefaultLocale();
   }
 
-  Future initSharedPreferences() async {
-    _sharedPreferences = await SharedPreferences.getInstance();
+  Future<void> setLocale(String locale) async {
+    await _sharedPreferences.setString("locale_key", locale);
   }
 
   Future<void> isLogin({required bool isLogin}) async {
@@ -220,5 +219,15 @@ class SharedPrefController {
 
   String? get prayShrouq {
     return _sharedPreferences.getString("shrouq");
+  }
+}
+
+extension NonNullLocale on String? {
+  String pareWithDefaultLocale() {
+    if (this == null) {
+      return 'ar';
+    } else {
+      return this!;
+    }
   }
 }

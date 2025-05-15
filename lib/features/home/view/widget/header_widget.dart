@@ -1,5 +1,5 @@
 import 'package:alraaqi_app/core/constant/color.dart';
-import 'package:alraaqi_app/core/constant/image_url.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/home/view/widget/icon_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +36,7 @@ class HeaderWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "الاختصارات",
+              ManagerStrings.shortcuts,
               style: TextStyle(
                   fontFamily: "Noor",
                   fontWeight: FontWeight.bold,
@@ -54,7 +54,8 @@ class HeaderWidget extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
-                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
                   ),
                   itemCount: itemData.length,
                   itemBuilder: (context, index) {

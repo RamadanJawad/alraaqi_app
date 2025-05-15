@@ -1,4 +1,5 @@
 import 'package:alraaqi_app/core/constant/color.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/core/data/data.dart';
 import 'package:alraaqi_app/features/tahseen/controller/tahseen_controller.dart';
 import 'package:alraaqi_app/features/tahseen/view/screen/saved_tashseen.dart';
@@ -15,14 +16,16 @@ class TahseenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(TahseenController());
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection:controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
           backgroundColor: ColorCode.backgroundColor,
           appBar: AppBar(
             backgroundColor: ColorCode.mainColor,
             iconTheme: IconThemeData(color: Colors.white),
             title: Text(
-              "التحصينات",
+              ManagerStrings.protections,
               style: TextStyle(
                   fontFamily: "Noor",
                   fontSize: 20.sp,
@@ -81,7 +84,7 @@ class TahseenScreen extends StatelessWidget {
                                 Get.showSnackbar(GetSnackBar(
                                   backgroundColor: ColorCode.mainColor,
                                   messageText: Text(
-                                    "تم نسخ النص بنجاح ",
+                                    ManagerStrings.copyText,
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
                                         color: Colors.white,

@@ -1,4 +1,6 @@
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
 import 'package:alraaqi_app/core/functions/check_internet.dart';
+import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +12,7 @@ class AthkarController extends GetxController {
   var duration = ''.obs;
   var max = 0.0.obs;
   var value = 0.0.obs;
+  SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
   var position = ''.obs;
   bool status = false;
   late String vedioId;
@@ -45,23 +48,23 @@ class AthkarController extends GetxController {
     update();
   }
 
-  final List<Map<String, String>> morningVideos = [
-    {"title": "مشاري العفاسي", "videoId": "OIWahnI8rSI"},
-    {"title": "إدريس أبكر", "videoId": "4ZjqVxoorNs"},
-    {"title": "أحمد النفيس", "videoId": "fD4uDIoCn3M"},
-    {"title": "عبدالكريم مهيوب", "videoId": "-wxIqA1u0jo"},
-    {"title": "غسان الشوربجي", "videoId": "bmLrnBEC9_Y"},
-    {"title": "سعد الغامدي", "videoId": "kswt7zgZFSs"},
-  ];
+  List<Map<String, String>> get morningVideos => [
+        {"title": "مشاري العفاسي", "videoId": "OIWahnI8rSI"},
+        {"title": "إدريس أبكر", "videoId": "4ZjqVxoorNs"},
+        {"title": "أحمد النفيس", "videoId": "fD4uDIoCn3M"},
+        {"title": "عبدالكريم مهيوب", "videoId": "-wxIqA1u0jo"},
+        {"title": "غسان الشوربجي", "videoId": "bmLrnBEC9_Y"},
+        {"title": "سعد الغامدي", "videoId": "kswt7zgZFSs"},
+      ];
 
-  final List<Map<String, String>> eveningVideos = [
-    {"title": "مشاري العفاسي", "videoId": "TGtdZmxsM5Q"},
-    {"title": "إدريس أبكر", "videoId": "yJf_SD5Zl_8"},
-    {"title": "أحمد النفيس", "videoId": "rQnNno3Do60"},
-    {"title": "عبدالكريم مهيوب", "videoId": "WZ3gvlbQrMs"},
-    {"title": "غسان ابو خضرة", "videoId": "ErNahkd8cNM"},
-    {"title": "سعد الغامدي", "videoId": "kswt7zgZFSs"},
-  ];
+  List<Map<String, String>> get eveningVideos => [
+        {"title": "مشاري العفاسي", "videoId": "TGtdZmxsM5Q"},
+        {"title": "إدريس أبكر", "videoId": "yJf_SD5Zl_8"},
+        {"title": "أحمد النفيس", "videoId": "rQnNno3Do60"},
+        {"title": "عبدالكريم مهيوب", "videoId": "WZ3gvlbQrMs"},
+        {"title": "غسان ابو خضرة", "videoId": "ErNahkd8cNM"},
+        {"title": "سعد الغامدي", "videoId": "kswt7zgZFSs"},
+      ];
 
   // Get favorites based on type
   List<Map<String, String>> getFavoriteVideos(bool isMorning) {

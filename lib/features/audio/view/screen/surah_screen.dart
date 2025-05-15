@@ -12,7 +12,9 @@ class SurahScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<AudioController>();
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

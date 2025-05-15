@@ -1,4 +1,5 @@
 import 'package:adhan/adhan.dart';
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
 import 'package:alraaqi_app/core/functions/notification.dart';
 import 'package:alraaqi_app/core/functions/snackbar.dart';
 import 'package:alraaqi_app/core/shared/shared_perf.dart';
@@ -10,7 +11,9 @@ import 'package:hijri/hijri_calendar.dart';
 
 class PrayTimeController extends GetxController {
   late SharedPreferences sharedPreferences;
+  SharedPrefController appSettings = instance<SharedPrefController>();
   late String currentPray;
+  SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
   bool value = false;
   late String prayTime;
   late PrayerTimes prayerTimes;
@@ -66,8 +69,8 @@ class PrayTimeController extends GetxController {
   initPryTime() {
     parameter = CalculationMethod.egyptian.getParameters();
     parameter.madhab = Madhab.shafi;
-    coordinates = Coordinates(SharedPrefController().latitude ?? 25.354826,
-        SharedPrefController().longitude ?? 51.183884);
+    coordinates = Coordinates(
+        appSettings.latitude ?? 25.354826, appSettings.longitude ?? 51.183884);
     prayerTimes = PrayerTimes.today(coordinates, parameter);
     update();
   }
@@ -78,9 +81,9 @@ class PrayTimeController extends GetxController {
       await AwesomeNotifications().requestPermissionToSendNotifications();
       return;
     }
-    bool status = SharedPrefController().status1;
+    bool status = appSettings.status1;
     status = !status;
-    SharedPrefController().saveStatus1(
+    appSettings.saveStatus1(
         status1: status); // Make sure this saves to SharedPreferences
     if (status) {
       CheckNotifications().prayTimeNotification();

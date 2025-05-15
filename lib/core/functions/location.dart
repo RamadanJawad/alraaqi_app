@@ -1,4 +1,4 @@
-
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
 import 'package:alraaqi_app/core/functions/awesome_dialog.dart';
 import 'package:alraaqi_app/core/functions/save_prayTimer.dart';
 import 'package:alraaqi_app/core/shared/shared_perf.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
+SharedPrefController _appSettings = instance<SharedPrefController>();
 Future<Position> determinePosition() async {
   bool serviceEnabled;
   LocationPermission permission;
@@ -26,7 +27,6 @@ Future<Position> determinePosition() async {
   if (permission == LocationPermission.deniedForever) {
     return Future.error(
         'Location permissions are permanently denied, we cannot request permissions.');
-        
   }
 
   return await Geolocator.getCurrentPosition();
@@ -34,15 +34,14 @@ Future<Position> determinePosition() async {
 
 getLatAndLong(PrayTimeController controller) async {
   Position position = await determinePosition();
-  SharedPrefController()
-      .saveCoordinate(long: position.longitude, lat: position.latitude);
+  _appSettings.saveCoordinate(long: position.longitude, lat: position.latitude);
   saveData(controller);
   print("save data sucessfully");
 }
 
 checkLocation(BuildContext context, PrayTimeController controller) async {
-  if (SharedPrefController().latitude == null &&
-      SharedPrefController().longitude == null) {
+  if (_appSettings.latitude == null &&
+      _appSettings.longitude == null) {
     Future.delayed(const Duration(milliseconds: 500), () {
       showAwesomeDialog(
           context: context,

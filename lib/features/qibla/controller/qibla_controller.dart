@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:alraaqi_app/core/cache/dependency_injection.dart';
+import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,6 +9,7 @@ import 'package:get/get.dart';
 class QiblaController extends GetxController
     with GetSingleTickerProviderStateMixin {
   Animation<double>? animation;
+  SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
   AnimationController? animationController;
   double begin = 0.0;
 

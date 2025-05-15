@@ -24,6 +24,27 @@ class PlayTool extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 4.h),
             child: Row(
               children: [
+                Container(
+                  width: 36.w,
+                  height: 36.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  child: IconButton(
+                    onPressed: () async {
+                      controller.disposeAndClosePlayTool();
+                    },
+                    icon: Icon(
+                      CupertinoIcons.clear,
+                      color: Colors.red,
+                      size: 20,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 6.w,
+                ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16.r),
                   child: Image.asset(
@@ -63,23 +84,6 @@ class PlayTool extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
-                ),
-                Container(
-                  width: 36.w,
-                  height: 36.h,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(10.r)),
-                  child: IconButton(
-                    onPressed: () {
-                      controller.skip();
-                    },
-                    icon: Icon(
-                      CupertinoIcons.arrow_right_to_line,
-                      color: Colors.black,
-                      size: 20,
-                    ),
                   ),
                 ),
                 SizedBox(

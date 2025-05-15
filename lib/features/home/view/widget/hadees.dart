@@ -1,5 +1,6 @@
 import 'package:alraaqi_app/core/constant/color.dart';
 import 'package:alraaqi_app/core/constant/image_url.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +41,7 @@ class HadeesWidget extends StatelessWidget {
                   height: 23.w,
                 ),
                 Text(
-                  "دعاء اليوم",
+                  ManagerStrings.todaysDua,
                   style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -52,15 +53,15 @@ class HadeesWidget extends StatelessWidget {
                   onPressed: () {
                     Clipboard.setData(
                         ClipboardData(text: "دعاء اليوم\n ${controller.dua}"));
-                    Get.showSnackbar(const GetSnackBar(
+                    Get.showSnackbar(GetSnackBar(
                       backgroundColor: ColorCode.mainColor,
                       messageText: Text(
-                        "تم نسخ النص بنجاح ",
+                        ManagerStrings.copyText,
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: "Noor",
-                            fontSize: 16),
+                            fontSize: 16.sp),
                       ),
                       duration: Duration(seconds: 2),
                     ));

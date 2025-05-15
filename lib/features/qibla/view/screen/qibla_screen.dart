@@ -1,4 +1,5 @@
 import 'package:alraaqi_app/core/constant/color.dart';
+import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/qibla/controller/qibla_controller.dart';
 import 'package:alraaqi_app/features/qibla/view/widget/qibla_compos.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +12,16 @@ class QiblaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(QiblaController());
+    final controller = Get.put(QiblaController());
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: controller.appSettingsPrefs.getLocale() == "ar"
+          ? TextDirection.rtl
+          : TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            "اتجاه القبلة",
+            ManagerStrings.qiblaDirection,
             style: TextStyle(
                 fontFamily: "Noor",
                 fontSize: 18.sp,
