@@ -16,7 +16,7 @@ class SurahWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AudioController>(builder: (controller) {
       return Stack(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.topCenter,
         children: [
           ListView.builder(
               itemCount: Data().surahs.length,

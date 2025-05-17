@@ -9,8 +9,10 @@ import 'package:alraaqi_app/core/localization/locales.dart';
 import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:alraaqi_app/features/audio/controller/audio_controller.dart';
 import 'package:alraaqi_app/features/pray_time/controller/prayTime_controller.dart';
+import 'package:alraaqi_app/features/roqia/controller/roqia_controller.dart';
 import 'package:alraaqi_app/routes/routes.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +27,7 @@ class HomeController extends GetxController {
   int currentPage = 0;
   final controller = Get.put(PrayTimeController());
   final controllerAudio = Get.put(AudioController());
+  final controllerRoqia = Get.put(RoqiaController());
   SharedPrefController appSettingsPrefs = instance<SharedPrefController>();
   final languagesList = LocaleSettings.languages;
   String get currentLanguage => appSettingsPrefs.getLocale();
@@ -107,13 +110,23 @@ class HomeController extends GetxController {
     update();
   }
 
+  void requestNotificationPermission() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        // اطلب الإذن من المستخدم
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+  }
+
   @override
   void onInit() {
     readData();
     super.onInit();
+    requestNotificationPermission();
     pageController = PageController();
     timer = Timer.periodic(
-      const Duration(seconds: 5),
+      const Duration(seconds: 10),
       (Timer timer) {
         if (currentPage < 11) {
           currentPage++;
@@ -128,7 +141,7 @@ class HomeController extends GetxController {
       },
     );
     saveData(controller);
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 2), () {
       showAwesomeDialog(
           context: context,
           description: ManagerStrings.titleDialog,

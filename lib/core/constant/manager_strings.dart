@@ -2,6 +2,22 @@ import 'package:easy_localization/easy_localization.dart';
 
 class ManagerStrings {
   static String get shortcuts => tr('shortcuts');
+  static String get surahFatiha7Times => tr('surahFatiha7Times');
+  static String get selfProtectionRuqyah => tr('selfProtectionRuqyah');
+  static String get shortRuqyah => tr('shortRuqyah');
+  static String get appAbout => tr("appAbout");
+  static String get powerfulRuqyah => tr('powerfulRuqyah');
+  static String get fullRuqyahQatami => tr('fullRuqyahQatami');
+  static String get fullRuqyahHashim => tr('fullRuqyahHashim');
+  static String get ruqyahAgainstMagic => tr('ruqyahAgainstMagic');
+  static String get physicalHealingRuqyah => tr('physicalHealingRuqyah');
+  static String get healingVerses => tr('healingVerses');
+  static String get shortPowerfulHealing => tr('shortPowerfulHealing');
+  static String get ayahKursiAndMuawidhat => tr('ayahKursiAndMuawidhat');
+  static String get abuHasanFortress => tr('abuHasanFortress');
+  static String get shortDailyRuqyah => tr('shortDailyRuqyah');
+  static String get homeAndSelfProtection => tr('homeAndSelfProtection');
+  static String get protectionDua => tr('protectionDua');
   static String get audios => tr('audios');
   static String get quran => tr('quran');
   static String get morningAzkar => tr('morning_azkar');

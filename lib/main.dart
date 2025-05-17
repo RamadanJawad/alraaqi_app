@@ -15,6 +15,14 @@ void main() async {
       'resource://drawable/logo',
       [
         NotificationChannel(
+          channelKey: 'audio_channel',
+          channelName: 'Audio Playback Notifications',
+          channelDescription: 'Notification for audio player',
+          defaultColor: Colors.teal,
+          importance: NotificationImportance.High,
+          channelShowBadge: true,
+        ),
+        NotificationChannel(
           channelKey: 'prayTime_channel',
           channelName: 'Pray Time Notification',
           channelDescription: 'Notification channel for basic tests',

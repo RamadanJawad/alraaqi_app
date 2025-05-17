@@ -13,7 +13,7 @@ class RecitersWidget extends StatelessWidget {
     return GetBuilder<AudioController>(
       builder: (controller) {
         return Stack(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.topCenter,
           children: [
             ListView.builder(
               itemCount: Data().reciters.length,

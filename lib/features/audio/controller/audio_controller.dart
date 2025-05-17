@@ -149,7 +149,6 @@ class AudioController extends GetxController {
   Future<void> playSong() async {
     try {
       Uri artUri = await getAssetImageFileUri(image, image.split('/').last);
-
       await player.setAudioSource(
         AudioSource.uri(
           Uri.parse(surah_url),

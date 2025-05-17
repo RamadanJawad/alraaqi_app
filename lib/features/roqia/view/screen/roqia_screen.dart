@@ -77,7 +77,7 @@ class RoqiaScreen extends StatelessWidget {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10.r),
                                 child: Image.asset(
-                                  "assets/images/roqia.jpeg",
+                                  item['imageUrl'],
                                   width: double.infinity,
                                   fit: BoxFit.cover,
                                   height: 100.h,
@@ -116,7 +116,7 @@ class RoqiaScreen extends StatelessWidget {
                 Obx(() {
                   if (controller.isShow.value) {
                     return Align(
-                      alignment: Alignment.bottomCenter,
+                      alignment: Alignment.topCenter,
                       child: PlayToolRoqia(),
                     );
                   } else {

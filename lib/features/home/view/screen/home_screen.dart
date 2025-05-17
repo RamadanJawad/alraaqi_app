@@ -1,7 +1,7 @@
 import 'package:alraaqi_app/core/constant/color.dart';
 import 'package:alraaqi_app/core/constant/manager_strings.dart';
-import 'package:alraaqi_app/core/shared/shared_perf.dart';
 import 'package:alraaqi_app/features/favorite/view/favorite_screen.dart';
+import 'package:alraaqi_app/features/roqia/view/widget/play_tool.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:alraaqi_app/features/audio/view/widget/play_tool.dart';
 import 'package:alraaqi_app/features/home/controller/home_controller.dart';
@@ -56,15 +56,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   Get.back(); // لإغلاق الدرج
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20)),
-                    ),
-                    builder: (context) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
+                  Get.defaultDialog(
+                      title: ManagerStrings.changeLanguage,
+                      content: Column(
                         children: [
                           ListTile(
                             title: Text(
@@ -75,6 +69,15 @@ class HomeScreen extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
+                            ),
+                            leading: Icon(
+                              controller.appSettingsPrefs.getLocale() == "ar"
+                                  ? Icons.check
+                                  : null,
+                              color: controller.appSettingsPrefs.getLocale() ==
+                                      "ar"
+                                  ? Colors.green
+                                  : Colors.transparent,
                             ),
                             onTap: () {
                               controller.changeLanguage(
@@ -92,6 +95,15 @@ class HomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
+                            leading: Icon(
+                              controller.appSettingsPrefs.getLocale() == "en"
+                                  ? Icons.check
+                                  : null,
+                              color: controller.appSettingsPrefs.getLocale() ==
+                                      "en"
+                                  ? Colors.green
+                                  : Colors.transparent,
+                            ),
                             onTap: () {
                               controller.changeLanguage(
                                   context: context, languageCode: "en");
@@ -99,9 +111,7 @@ class HomeScreen extends StatelessWidget {
                             },
                           ),
                         ],
-                      );
-                    },
-                  );
+                      ));
                 },
               ),
               ListTile(
@@ -137,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                     builder: (_) => AlertDialog(
                       title: Text(ManagerStrings.aboutUs),
                       content: Text(
-                        "تم تنفيذ هذا التطبيق بواسطةفاعلة خير قطرية ..الهدف من هذا التطبيق هو الاجر من اللّٰه سبحانه وتعالى ولاستفادة اكبر شريحة من المجتمع العربيوالاسلامي بالعلاج بالقرآن الكريمارجوا الدعاء لي بالتوفيق والنجاحوالاجر لي ولوالدتي التي كانت الداعم الاكبر لي ولكل من شجعني ودعمني معنويا والعاملين على نجاحهذا التطبيق..في النهاية ( اللهم اعنا على ذكرك وشكرك وحسن عبادتك )",
+                        ManagerStrings.appAbout,
                         style: TextStyle(
                             fontFamily: "Noor",
                             fontSize: 15.sp,
@@ -223,6 +233,14 @@ class HomeScreen extends StatelessWidget {
               Builder(builder: (innerContext) {
                 return Column(
                   children: [
+                    GetBuilder<HomeController>(
+                      builder: (controller) =>
+                          controller.controllerAudio.isShow.value
+                              ? const PlayTool()
+                              : controller.controllerRoqia.isShow.value
+                                  ? const PlayToolRoqia()
+                                  : SizedBox(),
+                    ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
@@ -235,12 +253,6 @@ class HomeScreen extends StatelessWidget {
                             size: 30,
                           )),
                     ),
-                    GetBuilder<HomeController>(
-                      builder: (controller) =>
-                          controller.controllerAudio.isShow.value
-                              ? const PlayTool()
-                              : const SizedBox.shrink(),
-                    )
                   ],
                 );
               }),

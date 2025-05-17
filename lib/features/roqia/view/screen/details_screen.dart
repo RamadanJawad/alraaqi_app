@@ -45,7 +45,8 @@ class DetailScreen extends StatelessWidget {
                     final item = items[index];
                     return InkWell(
                       onTap: () {
-                        controller.playSound(item['sound']!, item['name']!);
+                        controller.playSound(
+                            item['sound']!, item['name']!, item['imageUrl']!);
                       },
                       child: Container(
                         padding: const EdgeInsets.all(5),
@@ -68,9 +69,9 @@ class DetailScreen extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(10.r),
                               child: Image.asset(
-                                "assets/images/roqia.jpeg",
+                                item['imageUrl']!,
                                 width: double.infinity,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 height: 90.h,
                               ),
                             ),
@@ -111,7 +112,7 @@ class DetailScreen extends StatelessWidget {
               Obx(() {
                 if (controller.isShow.value) {
                   return Align(
-                    alignment: Alignment.bottomCenter,
+                    alignment: Alignment.topCenter,
                     child: PlayToolRoqia(),
                   );
                 } else {
