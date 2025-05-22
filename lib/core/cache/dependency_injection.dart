@@ -16,7 +16,6 @@ initModule() async {
     DeviceOrientation.portraitDown,
   ]);
   final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-
   if (!GetIt.I.isRegistered<SharedPreferences>()) {
     instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
   }

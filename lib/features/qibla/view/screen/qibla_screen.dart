@@ -12,7 +12,7 @@ class QiblaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(QiblaController());
+    final controller = Get.put(QiblaController()); controller.checkLocationStatus();
     return Directionality(
       textDirection: controller.appSettingsPrefs.getLocale() == "ar"
           ? TextDirection.rtl

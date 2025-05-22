@@ -4,7 +4,9 @@ import 'package:alraaqi_app/core/constant/manager_strings.dart';
 import 'package:alraaqi_app/features/qibla/controller/qibla_controller.dart';
 import 'package:alraaqi_app/features/qibla/view/widget/location_error_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -45,8 +47,7 @@ class QiblaCompass extends StatelessWidget {
                 }
               } else {
                 return LocationErrorWidget(
-                  error:
-                      ManagerStrings.qiblaError,
+                  error: ManagerStrings.qiblaError,
                   callback: controller.checkLocationStatus,
                 );
               }
@@ -71,6 +72,9 @@ class QiblahCompassWidget extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CupertinoActivityIndicator());
           }
+          if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text("Unable to get Qibla direction."));
+          }
           final qiblahDirection = snapshot.data!;
           controller.animation = Tween(
                   begin: controller.begin,
@@ -78,31 +82,53 @@ class QiblahCompassWidget extends StatelessWidget {
               .animate(controller.animationController!);
           controller.begin = (qiblahDirection.qiblah * (pi / 180) * -1);
           controller.animationController!.forward(from: 0);
-          return AnimatedBuilder(
-              animation: controller.animation!,
-              builder: (context, child) {
-                return Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    Transform.rotate(
-                      angle: controller.animation!.value,
-                      child: SvgPicture.asset('assets/svg/5.svg', // compass
-                          color: ColorCode.mainColor),
-                    ),
-                    _kaabaSvg,
-                    SvgPicture.asset('assets/svg/3.svg', //needle
-                        color: ColorCode.mainColor),
-                    const Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        "قم بمطابقة رأس السهمين \n من خلال تحريك الهاتف يمينا او شمالا",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontFamily: "Noor"),
-                      ),
-                    )
-                  ],
-                );
-              });
+          return Column(
+            children: [
+              SizedBox(
+                height: 30.h,
+              ),
+              Text(
+                "Compass angle:${snapshot.data!.direction.toStringAsFixed(2)}",
+                style: TextStyle(
+                    fontFamily: "Noor",
+                    fontSize: 14.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                "Qibla angle:${controller.fixedQiblaAngle?.toStringAsFixed(1) ?? "..."}",
+                style: TextStyle(
+                    fontFamily: "Noor",
+                    fontSize: 14.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              AnimatedBuilder(
+                  animation: controller.animation!,
+                  builder: (context, child) {
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Transform.rotate(
+                          angle: controller.animation!.value,
+                          child: SvgPicture.asset('assets/svg/5.svg', // compass
+                              color: ColorCode.mainColor),
+                        ),
+                        _kaabaSvg,
+                        SvgPicture.asset('assets/svg/3.svg', //needle
+                            color: ColorCode.mainColor),
+                        
+                      ],
+                    );
+                  }),
+            ],
+          );
         },
       );
     });
