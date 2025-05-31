@@ -12,27 +12,27 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 void main() async {
   await initModule();
   AwesomeNotifications().initialize(
-      'resource://drawable/logo',
-      [
-        NotificationChannel(
+    'resource://drawable/logo',
+    [
+      NotificationChannel(
           channelKey: 'audio_channel',
           channelName: 'Audio Playback Notifications',
           channelDescription: 'Notification for audio player',
           defaultColor: Colors.teal,
           importance: NotificationImportance.High,
-          channelShowBadge: true,
-        ),
-        NotificationChannel(
-          channelKey: 'prayTime_channel',
-          channelName: 'Pray Time Notification',
-          channelDescription: 'Notification channel for basic tests',
-          defaultColor: const Color(0xFF9D50DD),
-          ledColor: Colors.white,
-          importance: NotificationImportance.High,
-          channelShowBadge: true,
-        ),
-      ],
-      debug: true);
+          channelShowBadge: false,
+          ),
+      NotificationChannel(
+        channelKey: 'prayTime_channel',
+        channelName: 'Pray Time Notification',
+        channelDescription: 'Notification channel for basic tests',
+        defaultColor: const Color(0xFF9D50DD),
+        ledColor: Colors.white,
+        importance: NotificationImportance.High,
+        channelShowBadge: false,
+      ),
+    ],
+  );
   initAudioBackground();
   runApp(
     EasyLocalization(

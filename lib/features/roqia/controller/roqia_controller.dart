@@ -57,6 +57,7 @@ class RoqiaController extends GetxController {
       );
       isShow(true);
       _showNotification(
+        idCancel: 2,
         id: 1,
         title: 'تشغيل الصوت',
         body: 'تم بدء تشغيل: $name',
@@ -64,6 +65,7 @@ class RoqiaController extends GetxController {
       player.playerStateStream.listen((state) {
         if (state.processingState == ProcessingState.completed) {
           _showNotification(
+            idCancel: 1,
             id: 2,
             title: 'انتهاء الصوت',
             body: 'انتهى تشغيل: $name',
@@ -94,7 +96,11 @@ class RoqiaController extends GetxController {
   }
 
   void _showNotification(
-      {required int id, required String title, required String body}) {
+      {required int id,
+      required String title,
+      required String body,
+      required int idCancel}) async {
+    await AwesomeNotifications().cancel(idCancel);
     AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: id,

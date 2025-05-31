@@ -241,8 +241,12 @@ class HomeScreen extends StatelessWidget {
                                   ? const PlayToolRoqia()
                                   : SizedBox(),
                     ),
-                    Align(
-                      alignment: Alignment.topLeft,
+                    Container(
+                      alignment: controller.appSettingsPrefs.getLocale() == "ar"
+                          ? Alignment.topLeft
+                          : Alignment.topRight,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
                       child: IconButton(
                           onPressed: () {
                             Scaffold.of(innerContext).openEndDrawer();

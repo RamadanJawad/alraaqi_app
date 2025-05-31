@@ -113,10 +113,10 @@ class AzkarMorning extends StatelessWidget {
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
                                             video["title"]!,
-                                            textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontFamily: "Noor",
-                                              fontSize: 16.sp,
+                                              fontSize: 14.sp,
+                                              overflow: TextOverflow.ellipsis,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
