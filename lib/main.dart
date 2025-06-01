@@ -34,6 +34,7 @@ void main() async {
     ],
   );
   initAudioBackground();
+  AwesomeNotifications().setGlobalBadgeCounter(0);
   runApp(
     EasyLocalization(
       supportedLocales: localeSettings.locales,

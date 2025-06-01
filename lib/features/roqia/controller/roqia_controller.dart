@@ -107,6 +107,7 @@ class RoqiaController extends GetxController {
         channelKey: 'audio_channel',
         title: title,
         body: body,
+        badge: 0,
         notificationLayout: NotificationLayout.Default,
       ),
     );
